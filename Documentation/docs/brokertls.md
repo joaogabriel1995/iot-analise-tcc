@@ -39,12 +39,60 @@ Primeiro passo é criar uma pasta denominada `mosquitto`, dentro dessa pasta é 
 
 ```
 .
-|-- config
-|   `-- mosquitto.conf
-|-- data
-|-- docker-compose.yml
-`-- log
-    `-- mosquitto.log
+├── config
+│   ├── certs
+│   │   ├── ca.crt
+│   │   ├── server.crt
+│   │   └── server.key
+│   └── mosquitto.conf
+├── data
+├── docker-compose.yml
+└── log
+    └── mosquitto.log
+
+```
+Primeiro iremos configurar o arquivo de configuração do broker do seguinte modo.
+
+```title="mosquitto/config/mosquitto.conf"
+listener 8883
+allow_anonymous true
+cafile /mosquitto/config/certs/ca.crt
+certfile /mosquitto/config/certs/server.crt
+keyfile /mosquitto/config/certs/server.key
+tls_version tlsv1.2
+
 ```
 
-3 directories, 3 files
+``` title="docker-compose.yaml"
+version: "3.7"
+
+services:
+  mqtt_tls:
+    container_name: mqtt_tls
+    image: eclipse-mosquitto
+    restart: always
+    volumes:
+      - /home/joao/Documents/mosquittotls/config:/mosquitto/config
+      - /home/joao/Documents/mosquittotls/data:/mosquitto/data
+      - /home/joao/Documents/mosquittotls/log:/mosquitto/log
+    ports:
+      - 8883:8883
+
+    networks:
+      - intnet
+
+volumes:
+  node-red-data:
+
+
+networks:
+  intnet:
+
+```
+
+Após essas configurações será necessário rodar o seguinte comando no mesmo diretório que o arquivo `docker-compose.yml` está salvo.
+
+
+```title="bash"
+docker-compose up
+```

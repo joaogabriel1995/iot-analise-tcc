@@ -10,14 +10,11 @@ Primeiro passo é criar uma pasta denominada `mosquitto`, dentro dessa pasta é 
 
 ```
 .
-|-- config
-|   `-- mosquitto.conf
-|-- data
-|-- docker-compose.yml
-`-- log
-    `-- mosquitto.log
-
-3 directories, 3 files
+├── config
+│   └── mosquitto.conf
+├── docker-compose.yml
+└── log
+    └── mosquitto.log
 ```
 
 Primeiro iremos configurar o arquivo de configuração do broker do seguinte modo.
