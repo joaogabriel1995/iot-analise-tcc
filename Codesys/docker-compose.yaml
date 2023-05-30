@@ -1,7 +1,0 @@
-version: '3'
-services:
-  codesys:
-    image: store/codesys/iot-raspberry-pi:latest
-    ports:
-      - 1212:1212
-      - 8080:8080
