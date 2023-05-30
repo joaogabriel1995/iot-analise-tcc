@@ -16,12 +16,10 @@ nav:
   - Estrutura de Pastas: path.md
   - Código para Simulação: code.md
   - Metodologia Proposta: metodologia.md
-
-  - Definindo tamanho de amostra: tamanho_da_amos.md
   - AmostrasPilotos: 
-    - Analisando Amostra piloto: analise_amostra_piloto.md
-    - Relatorio : ./amostras_piloto/index.md
-    - Teste: ./amostras_piloto/teste.md
+    - Analisando Amostra piloto: ./amostras_piloto/analise_amostra_piloto.md
+    - Definindo tamanho de amostra: ./amostras_piloto/tamanho_da_amos.md
+
 
 
 
