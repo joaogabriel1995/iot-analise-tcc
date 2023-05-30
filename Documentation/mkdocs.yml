@@ -11,8 +11,8 @@ theme:
 nav:
   - Introdução: index.md
   - Servidor MQTT (Broker):
-    - Servidor Sem TLS: broker.md
-    - Servidor Com TLS: brokertls.md
+    - Servidor Sem TLS: broker/broker.md
+    - Servidor Com TLS: broker/brokertls.md
   - Estrutura de Pastas: path.md
   - Código para Simulação: code.md
   - Metodologia Proposta: metodologia.md

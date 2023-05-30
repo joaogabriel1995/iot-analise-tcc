@@ -6,25 +6,30 @@ Como podemos analisar o arquivo locust é um módulo Python normal, ele pode imp
 Nesse primeiro momento irei explicar os códigos e resultados para os testes sem a utilização do protocolo de segurança `Transport Layer Security`(TLS)
 
 Segue abaixo um fluxograma reduzido de como é realizado a simulação dos nossos dispositivos.
-
+<!-- 
 ![alt text for screen readers](image/simulacao.png 'fluxograma')
 _Figura 5 - Fluxograma da simulação_
 
-Esse fluxo será realizado por nosso script que será explicado logo abaixo.
+Esse fluxo será realizado por nosso script que será explicado logo abaixo. -->
 
-## Import
+## Código Completo
 
-```.py
-import time
-from locust import User, TaskSet, events, task
-import paho.mqtt.client as mqtt
-```
+Logo abaixo irei apresentar o código completo que foi utilizado no locustfile e após isso irei detalhar algumas partes do código.
+<script src="https://gist.github.com/joaogabriel1995/fe91b9d642c886995f1dd32f7489c5aa.js"></script>
+
+## Entendendo o código
+
+### Classe User
+
+A classe Usuário no locust é uma classe fundamental na estrutura do locust. Um usuário do locust
+nada mais é que uma entidade simulada que irá executar ações no sistema alvo. No caso dessa simulação os usuários serão os dispositivos 
+de internet das coisas que será simulado. 
+
+
 
 Primeiro iremos definir uma classe para os usuários que iremos simular. Essa classe herda da classe User do Locust.
 
 Iremos inicializar essa classe com o nosso método construtor `__init__` e iremos utilizar `super()`, função que nos permite sobrescrever métodos e alterar comportamentos.
-
-## Classe User
 
 ```{.py line linenums="1"}
 class MQTTLocust(User):
