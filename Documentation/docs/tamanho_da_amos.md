@@ -150,50 +150,6 @@ for port in ports:
 
 
 ```
-
-## Conceitos básicos de estatística
-
-Para calcularmos o número de amostras precisamos entender alguns conceitos básicos, irei abordar de forma breve para darmos andamento nos calculos.
-
-### Intervalo de confiança
-
-Um intervalo de confiança é uma amplitude de valores, que são derivadas de estatísticas de amostras, que tem a probabilidade de conter o valor de um parâmetro populacional desconhecido.
-
-O **nível de confiança** ($1 - \alpha$) representa a probabilidade de acerto da estimativa. De forma complementar o **nível de significância** ($\alpha$) expressa a probabilidade de erro da estimativa.
-
-O **nível de confiança** representa o grau de confiabilidade do resultado da estimativa estar dentro de determinado intervalo. Quando fixamos em uma pesquisa um **nível de confiança** de 95%, por exemplo, estamos assumindo que existe uma probabilidade de 95% dos resultados da pesquisa representarem bem a realidade, ou seja, estarem corretos.
-
-O **nível de confiança** de uma estimativa pode ser obtido a partir da área sob a curva normal como ilustrado na figura abaixo.
-
-![alt text](https://caelum-online-public.s3.amazonaws.com/1178-estatistica-parte2/01/img007.png)
-
-### Score Z
-
-- É o quanto uma medida se afasta da média em termos de Desvios
-  Padrão.
-- Quando o escore Z é positivo isto indica que o dado está acima da
-  média e quando o mesmo é negativo significa que o dado está abaixo
-  da média.
-- Seus valores oscilam entre -3 < Z < +3 e isto corresponde a 99,72% da
-  área sob a curva da Distribuição Normal.
-
-Em nosso estudo iremos utilizar um nivel de confiança igual a 95% e se consultarmos a tabela de Distribuição normal iremos encontrar um z é aproximadamente 1,96.
-
-Z = 1,96 (tabela da Distribuição Normal)
-
-## Calculando o número de amostra
-
-Para o calculo do número de amostra iremos utilizar a seguinte formula:
-
-$$n = \left(z\frac{s}{e}\right)^2$$
-
-onde:
-$z$ = variável normal padronizada
-
-$s$ = desvio padrão amostral
-
-$e$ = erro inferencial
-
 ### Calculando o desvio padrão $s$
 
 ```python title="relatorio.ipynb"

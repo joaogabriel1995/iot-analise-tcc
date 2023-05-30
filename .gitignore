@@ -1,4 +1,6 @@
 venv/
 site/
+calc/
+
 
 *.crt
