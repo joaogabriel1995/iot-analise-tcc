@@ -1,0 +1,28 @@
+{
+    "name": "mkdocs_server",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "ts-node-dev --respawn --transpile-only src/serve.ts",
+      "dev": "tsx watch  src/serve.ts",
+      "prod": "node documentation/serve",
+      "build": "node dist/server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "ts-node": "^10.9.1",
+      "ts-node-dev": "^2.0.0",
+      "tsx": "^3.12.6",
+      "typescript": "^5.0.4"
+    },
+    "dependencies": {
+      "@types/express": "^4.17.17",
+      "express": "^4.18.2",
+      "tsc": "^2.0.4"
+    }
+  }
+  

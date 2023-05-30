@@ -1,4 +1,5 @@
 site_name: Simulação IoT
+site_dir: public
 theme:
   name: material
   features:
@@ -9,16 +10,20 @@ theme:
 
 nav:
   - Introdução: index.md
-  - Servidor MQTT: broker.md
-  - Servidor MQTT TLS: brokertls.md
-
+  - Servidor MQTT (Broker):
+    - Servidor Sem TLS: broker.md
+    - Servidor Com TLS: brokertls.md
   - Estrutura de Pastas: path.md
-
   - Código para Simulação: code.md
   - Metodologia Proposta: metodologia.md
 
   - Definindo tamanho de amostra: tamanho_da_amos.md
-  - Analisando Amostra piloto: analise_amostra_piloto.md
+  - AmostrasPilotos: 
+    - Analisando Amostra piloto: analise_amostra_piloto.md
+    - Relatorio : ./amostras_piloto/index.md
+    - Teste: ./amostras_piloto/teste.md
+
+
 
 markdown_extensions:
   - admonition
