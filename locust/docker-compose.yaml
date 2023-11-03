@@ -1,0 +1,14 @@
+services:
+  master:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+     - "8089:8089"
+    command: locust -f locustfiles/locustfile.py --master -H http://master:8089
+  
+  worker:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    command: locust -f locustfiles/locustfile.py --worker --master-host master

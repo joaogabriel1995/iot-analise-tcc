@@ -8,7 +8,7 @@ from utils.generateMessage import generate_random_payload
 
 class MqttTaskSet(TaskSet):
     
-    request_count = 0
+    
 
     def __init__(self, parent):
         super().__init__(parent)
@@ -16,11 +16,11 @@ class MqttTaskSet(TaskSet):
 
     @task
     def publish_message(self):
-        self.request_count += 1
+        self.client.request_count += 1
 
-        if self.request_count >= int(config.NUM_REQUESTS):
+        if self.client.request_count >= int(config.NUM_REQUESTS):
             self.user.stop()
-        self.client.payload = generate_random_payload(int(config.SIZE_PAYLOAD))
+        self.client.payload = generate_random_payload(int(config.SIZE_PAYLOAD), self.client._client_id.decode(),self.client.request_count )
         self.client.start_time = time.monotonic()
         MQTTMessageInfo = self.client.publish(
         self.client._client_id.decode(), self.client.payload, qos=1, retain=False)
@@ -29,9 +29,9 @@ class MqttTaskSet(TaskSet):
 
 
 class MQTTUser(User):
+    
     tasks = [MqttTaskSet]
     wait_time = between(1, 6)
-
 
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,6 +43,7 @@ class MQTTUser(User):
         self.client.on_message = self.on_message
         self.client.on_publish = self.on_publish
         self.reached_request_count = False
+        self.client.request_count = 0
 
 
     def on_connect(self, client, userdata, flags, rc):
@@ -53,10 +54,10 @@ class MQTTUser(User):
         end_time = time.monotonic()
         rtt = end_time - client.start_time
         print("on_publish",rtt*1000)
-        events.request.fire(request_type="Round Trip Time", name=client._client_id.decode(), response_time=rtt*1000, response_length=len(client.payload), response="None", 
+        events.request.fire(request_type="Round Trip Time", name=self.client._client_id.decode(), response_time=rtt*1000, response_length=len(self.client.payload), response="None", 
             context={},
             exception=None,
-            start_time=client.start_time,
+            start_time=self.client.start_time,
             url=None,)
         
 
@@ -72,17 +73,19 @@ class MQTTUser(User):
     
 
     def on_start(self):
+        self.client.request_count +=1
         self.client.connect(config.BROKER_HOST, config.BROKER_PORT, 60)
         self.client.loop_start()
-
+        time.sleep(2)
         self.client.subscribe(self.client._client_id.decode())
-    
+        time.sleep(2)
+
 
     def on_stop(self):
-        print(f"User {self.client._client_id.decode()} finished with {self.request_count} requests.")
+        print(f"User {self.client._client_id.decode()} finished with {self.client.request_count} requests.")
         self.client.loop_stop()
 
         self.client.disconnect()
         if self.environment.runner.user_count == 1:
             resetUserCount()
-            self.user.environment.runner.stop()
+            self.stop()
